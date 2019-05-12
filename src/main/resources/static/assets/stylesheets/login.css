@@ -1,0 +1,143 @@
+/* Reset default layout */
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+
+/* HTML and Body */
+
+html, body {
+    height: 100%;
+    z-index: 1;
+}
+
+/* Background */
+
+#background-image {
+    background-image: url("../images/background/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    position: fixed;
+}
+
+/* Centering */
+
+#login-content,
+#greeting-content {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Login Form */
+
+.login-form-container,
+.greeting-container {
+    background-color: rgba(255, 255, 255, 0.36);
+    max-height: 100%;
+    max-width: 20%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Logo Image */
+
+.logo-container {
+    background-color: rgba(0, 0, 0, 0.56);
+    border-bottom: 5px solid #85C8D5;
+}
+
+.logo-container img {
+    max-width: 80%;
+    margin: 12% 8%;
+}
+
+.login-form {
+    margin: 12% 8%;
+}
+
+/* Input Fields */
+
+input {
+    padding: 4%;
+    margin: auto;
+    display: block;
+    outline-color: #0A91AB;
+    color: #0A91AB;
+    text-align: center;
+    border: 1px solid #FFC144;
+    border-radius: 5%;
+    width: 80%;
+}
+
+input::placeholder {
+    text-align: center;
+    color: #0A91AB;
+}
+
+/* Login Button */
+
+.button {
+    cursor: pointer;
+    color: #FFEFD0;
+    background-color: #85C8D5;
+    border: none;
+    box-shadow:
+            0 2px 5px rgba(0, 0, 0, 0.5),
+            0 1px 0 rgba(255, 255, 255, 0.25) inset,
+            0 0 0 rgba(0, 0, 0, 0.25) inset,
+            0 20px 0 rgba(255, 255, 255, 0.03) inset,
+            0 -20px 20px rgba(0, 0, 0, 0.15) inset,
+            0 20px 20px rgba(255, 255, 255, 0.05) inset;
+    transition: all 0.4s linear 0s;
+}
+
+.button:hover {
+    background-color: #FFBF45;
+}
+
+/* Greeting Container */
+
+.greeting-container {
+    width: 100%;
+    height: 30%;
+    position: relative;
+    padding-top: 2%;
+}
+
+/* Header Tags */
+
+h1 {
+    color: #FFBF45;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 2;
+}
+
+h2, h3, h4 {
+    color: #FFF;
+    font-size: 25px;
+}
+
+input[value="Logout"] {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+}
+
+/* Hide Greeting Section */
+
+#greeting-content {
+    display: none;
+}
