@@ -135,9 +135,3 @@ input[value="Logout"] {
     bottom: 10%;
     left: 10%;
 }
-
-/* Hide Greeting Section */
-
-#greeting-content {
-    display: none;
-}
