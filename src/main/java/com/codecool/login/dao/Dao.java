@@ -1,13 +1,14 @@
 package com.codecool.login.dao;
 
+import java.util.List;
+
 import com.codecool.login.model.Session;
 
 public interface Dao {
 
-    public void create(Session session);
+    public int create(Session session) throws DaoException;
 
-    public void delete(Session session);
+    public int update(Session session) throws DaoException;
 
-    public void update(Session session);
-
+    public List<Session> getSessions() throws DaoException;
 }
