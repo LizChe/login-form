@@ -3,6 +3,7 @@ package com.codecool.login.model;
 public class Session {
 
     private final int id;
+    private final byte[] salt;
     private String userName;
     private String userPassword;
     private String sessionId;
@@ -12,6 +13,7 @@ public class Session {
         this.userName = builder.userName;
         this.userPassword = builder.userPassword;
         this.sessionId = builder.sessionId;
+        this.salt = builder.salt;
     }
 
     public String getUserName() {
@@ -30,18 +32,28 @@ public class Session {
         return id;
     }
 
+    public byte[] getSalt() {
+        return salt;
+    }
+
     public void setSessionId(String sessionId) {
         this.sessionId = sessionId;
     }
 
     public static class Builder {
         private int id;
+        private byte[] salt;
         private String userName;
         private String userPassword;
         private String sessionId;
 
         public Builder withId(int id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder withSalt(byte[] salt) {
+            this.salt = salt;
             return this;
         }
 
