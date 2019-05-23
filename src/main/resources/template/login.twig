@@ -19,7 +19,7 @@
 
 <div id="background-image"></div>
 
-{% if isNewSession == true %}
+{% if newSession %}
 
     <section content="primary-section" id="login-content">
 
@@ -47,7 +47,7 @@
 
 {% endif %}
 
-{% if isNewSession == false %}
+{% if oldSession %}
 
     <section content="greeting-section" id="greeting-content">
 
