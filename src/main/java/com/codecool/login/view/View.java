@@ -2,19 +2,17 @@ package com.codecool.login.view;
 
 public class View {
 
-    private final String RESET = "\u001B[0m";
-
     private void printText(String message) {
         System.out.println(message);
     }
 
     public void printError(String message) {
-        final String RED = "\u001B[31m";
-        printText(RED + message + RESET);
+        System.err.println(message);
     }
 
     public void printSuccess(String message) {
-        final String GREEN = "\u001B[32m";
-        printText(GREEN + message + RESET);
+        final String green = "\u001B[32m";
+        final String reset = "\u001B[0m";
+        printText(green + message + reset);
     }
 }
