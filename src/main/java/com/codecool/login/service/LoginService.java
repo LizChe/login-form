@@ -8,6 +8,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+
+import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.SecretKeyFactory;
+
 import com.codecool.login.dao.Dao;
 import com.codecool.login.dao.DaoException;
 import com.codecool.login.dao.SessionDaoImpl;
@@ -44,11 +50,14 @@ public class LoginService {
     }
 
     public void handleSession(String userName, String userPassword, String sessionId) {
+        byte[] salt = getValidSalt(userName);
+        userPassword = getHashedPassword(salt, userPassword);
         List<Session> sessions = findUserBy(userName, userPassword);
         Session session = new Session.Builder()
                 .withUserName(userName)
                 .withUserPassword(userPassword)
                 .withSessionId(sessionId)
+                .withSalt(salt)
                 .build();
         if (sessions.isEmpty()) {
             create(session);
@@ -107,5 +116,44 @@ public class LoginService {
             view.printError(e.getMessage());
         }
         return result;
+    }
+
+    private byte[] getGeneratedSalt() {
+        SecureRandom secureRandom = new SecureRandom();
+        byte[] salt = new byte[16];
+        secureRandom.nextBytes(salt);
+        return salt;
+    }
+
+    private String getHashedPassword(byte[] salt, String password) {
+        KeySpec keySpec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+        SecretKeyFactory factory;
+        byte[] hash = null;
+        try {
+            factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+            hash = factory.generateSecret(keySpec).getEncoded();
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+            view.printError(e.getMessage());
+        }
+        return Base64.getEncoder().encodeToString(hash);
+    }
+
+    private byte[] getValidSalt(String userName) {
+        byte[] salt = getSaltBy(userName);
+        if (salt == null) {
+            return getGeneratedSalt();
+        } else {
+            return salt;
+        }
+    }
+
+    private byte[] getSaltBy(String userName) {
+        byte[] salt = null;
+        try {
+            salt = dao.getSaltBy(userName);
+        } catch (DaoException e) {
+            view.printError("Failed to get salt by name.\n" + e.getMessage());
+        }
+        return salt;
     }
 }
