@@ -15,4 +15,6 @@ public interface Dao {
     public List<Session> getSessions(String userName, String userPassword) throws DaoException;
 
     public int delete(String sessionId) throws DaoException;
+
+    public byte[] getSaltBy(String userName) throws DaoException;
 }
