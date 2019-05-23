@@ -50,7 +50,7 @@ public class Session {
             return this;
         }
 
-        public Builder withUserPassword(String password) {
+        public Builder withUserPassword(String userPassword) {
             this.userPassword = userPassword;
             return this;
         }
