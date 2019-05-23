@@ -10,5 +10,9 @@ public interface Dao {
 
     public int update(Session session) throws DaoException;
 
-    public List<Session> getSessions() throws DaoException;
+    public List<Session> getSessions(String sessionId) throws DaoException;
+
+    public List<Session> getSessions(String userName, String userPassword) throws DaoException;
+
+    public int delete(String sessionId) throws DaoException;
 }
