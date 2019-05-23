@@ -29,7 +29,7 @@ public class CookieHelper {
     public Optional<HttpCookie> findCookieBy(String name, List<HttpCookie> cookies) {
         for (HttpCookie cookie : cookies) {
             if (cookie.getName().equals(name))
-                return Optional.ofNullable(cookie);
+                return Optional.of(cookie);
         }
         return Optional.empty();
     }
