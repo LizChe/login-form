@@ -140,11 +140,7 @@ public class LoginService {
 
     private byte[] getValidSalt(String userName) {
         byte[] salt = getSaltBy(userName);
-        if (salt == null) {
-            return getGeneratedSalt();
-        } else {
-            return salt;
-        }
+        return salt.length == 0 ? getGeneratedSalt() : salt;
     }
 
     private byte[] getSaltBy(String userName) {
